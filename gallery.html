@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | R2 Unisex Salon & Beauty Academy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-gem"></i>
+                <span>R2 SALON</span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+                <li><a href="booking.html">Book Now</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-cta">
+                <a href="tel:07977934485" class="cta-phone">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>079779 34485</span>
+                </a>
+                <a href="booking.html" class="btn-primary">Book Appointment</a>
+            </div>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content" data-aos="fade-up">
+                <span class="page-label">Our Work</span>
+                <h1 class="page-title">Gallery</h1>
+                <p class="page-description">
+                    Explore our portfolio of stunning transformations and happy clients
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Filter -->
+    <section class="gallery-filter">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="haircut">Haircuts</button>
+                <button class="filter-btn" data-filter="color">Hair Color</button>
+                <button class="filter-btn" data-filter="treatment">Treatments</button>
+                <button class="filter-btn" data-filter="styling">Styling</button>
+                <button class="filter-btn" data-filter="bridal">Bridal</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="gallery-grid">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item" data-category="haircut color">
+                    <div class="gallery-image">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Balayage & Haircut</h3>
+                                <p>Soft layering with honey blonde highlights</p>
+                            </div>
+                            <button class="gallery-btn" onclick="openGalleryModal(0)">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item" data-category="color">
+                    <div class="gallery-image">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Ombre Hair Color</h3>
+                                <p>Dark to light gradient coloring</p>
+                            </div>
+                            <button class="gallery-btn" onclick="openGalleryModal(1)">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item" data-category="treatment">
+                    <div class="gallery-image">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Nanoplastia Treatment</h3>
+                                <p>Smooth, frizz-free hair transformation</p>
+                            </div>
+                            <button class="gallery-btn" onclick="openGalleryModal(2)">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item" data-category="styling">
+                    <div class="gallery-image">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Soft Curls Styling</h3>
+                                <p>Elegant soft waves for special occasion</p>
+                            </div>
+                            <button class="gallery-btn" onclick="openGalleryModal(3)">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item" data-category="haircut">
+                    <div class="gallery-image">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Layered Bob Cut</h3>
+                                <p>Modern layered bob with texture</p>
+                            </div>
+                            <button class="gallery-btn" onclick="openGalleryModal(4)">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 6 -->
+                <div class="gallery-item" data-category="color">
+                    <div class="gallery-image">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Highlights & Lowlights</h3>
+                                <p>Multi-dimensional color technique</p>
+                            </div>
+                            <button class="gallery-btn" onclick="openGalleryModal(5)">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 7 -->
+                <div class="gallery-item" data-category="bridal styling">
+                    <div class="gallery-image">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Bridal Hairstyle</h3>
+                                <p>Elegant updo with floral accessories</p>
+                            </div>
+                            <button class="gallery-btn" onclick="openGalleryModal(6)">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 8 -->
+                <div class="gallery-item" data-category="haircut">
+                    <div class="gallery-image">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Men's Fade Haircut</h3>
+                                <p>Clean fade with textured top</p>
+                            </div>
+                            <button class="gallery-btn" onclick="openGalleryModal(7)">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 9 -->
+                <div class="gallery-item" data-category="treatment">
+                    <div class="gallery-image">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Hair Botox Treatment</h3>
+                                <p>Restored shine and volume</p>
+                            </div>
+                            <button class="gallery-btn" onclick="openGalleryModal(8)">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 10 -->
+                <div class="gallery-item" data-category="styling">
+                    <div class="gallery-image">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Sleek Straight Style</h3>
+                                <p>Glass hair finish with perfect shine</p>
+                            </div>
+                            <button class="gallery-btn" onclick="openGalleryModal(9)">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 11 -->
+                <div class="gallery-item" data-category="color haircut">
+                    <div class="gallery-image">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Pixie Cut with Color</h3>
+                                <p>Bold short cut with vibrant color</p>
+                            </div>
+                            <button class="gallery-btn" onclick="openGalleryModal(10)">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 12 -->
+                <div class="gallery-item" data-category="bridal">
+                    <div class="gallery-image">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Bridal Makeup Look</h3>
+                                <p>Complete bridal makeover package</p>
+                            </div>
+                            <button class="gallery-btn" onclick="openGalleryModal(11)">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Testimonials in Gallery -->
+    <section class="gallery-testimonials">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">Client Love</span>
+                <h2 class="section-title">Transform Your Look with Us</h2>
+            </div>
+            <div class="testimonial-gallery-grid">
+                <div class="testimonial-gallery-card" data-aos="fade-up">
+                    <div class="testimonial-image">
+                        <div class="before-after">
+                            <span class="badge badge-before">Before</span>
+                            <span class="badge badge-after">After</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <div class="stars">★★★★★</div>
+                        <p>"Amazing transformation! My hair looks and feels incredible after the balayage service."</p>
+                        <div class="client-name">- Prachi</div>
+                    </div>
+                </div>
+
+                <div class="testimonial-gallery-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-image">
+                        <div class="before-after">
+                            <span class="badge badge-before">Before</span>
+                            <span class="badge badge-after">After</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <div class="stars">★★★★★</div>
+                        <p>"The Nanoplastia treatment gave me the smooth, manageable hair I always wanted!"</p>
+                        <div class="client-name">- Swati Gaikwad</div>
+                    </div>
+                </div>
+
+                <div class="testimonial-gallery-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-image">
+                        <div class="before-after">
+                            <span class="badge badge-before">Before</span>
+                            <span class="badge badge-after">After</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <div class="stars">★★★★★</div>
+                        <p>"Best haircut I've ever had! The stylist understood exactly what I wanted."</p>
+                        <div class="client-name">- Ragini DN</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Feed Section -->
+    <section class="instagram-feed">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">Follow Us</span>
+                <h2 class="section-title">@r2salon on Instagram</h2>
+                <p class="section-description">Stay updated with our latest work and offers</p>
+            </div>
+            <div class="instagram-grid">
+                <a href="#" class="instagram-item" data-aos="zoom-in">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </a>
+                <a href="#" class="instagram-item" data-aos="zoom-in" data-aos-delay="50">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </a>
+                <a href="#" class="instagram-item" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </a>
+                <a href="#" class="instagram-item" data-aos="zoom-in" data-aos-delay="150">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </a>
+                <a href="#" class="instagram-item" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </a>
+                <a href="#" class="instagram-item" data-aos="zoom-in" data-aos-delay="250">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="instagram-cta">
+                <a href="#" class="btn-primary">
+                    <i class="fab fa-instagram"></i>
+                    Follow Us on Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content" data-aos="zoom-in">
+                <h2>Get Your Own Transformation!</h2>
+                <p>Book your appointment and let our experts create your perfect look</p>
+                <div class="cta-buttons">
+                    <a href="booking.html" class="btn-primary btn-large">Book Appointment</a>
+                    <a href="https://wa.me/917977934485" class="btn-whatsapp btn-large" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        WhatsApp Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Modal -->
+    <div class="gallery-modal" id="galleryModal">
+        <button class="modal-close" onclick="closeGalleryModal()">
+            <i class="fas fa-times"></i>
+        </button>
+        <button class="modal-prev" onclick="prevGalleryImage()">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="modal-next" onclick="nextGalleryImage()">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="modal-content">
+            <div class="modal-image"></div>
+            <div class="modal-info">
+                <h3 class="modal-title"></h3>
+                <p class="modal-description"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-gem"></i>
+                        <span>R2 SALON</span>
+                    </div>
+                    <p class="footer-desc">
+                        Premium unisex salon and beauty academy in Airoli, delivering exceptional 
+                        hair and beauty services with expert care.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://wa.me/917977934485" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.google.com/maps/search/?api=1&query=R2+Unisex+Salon+Airoli" target="_blank"><i class="fas fa-map-marker-alt"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="booking.html">Book Appointment</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="services.html">Hair Styling</a></li>
+                        <li><a href="services.html">Hair Coloring</a></li>
+                        <li><a href="services.html">Hair Spa</a></li>
+                        <li><a href="services.html">Nanoplastia Treatment</a></li>
+                        <li><a href="services.html">Beauty Academy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Shop No. 01, Rainbow Tower, Sector 20, Airoli, Navi Mumbai</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:07977934485">079779 34485</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Open Daily - Closes 11 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 R2 Unisex Salon & Beauty Academy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/917977934485?text=Hi%20R2%20Salon!%20I%20would%20like%20to%20book%20an%20appointment." 
+       class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">Chat with us</span>
+    </a>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
