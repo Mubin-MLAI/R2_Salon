@@ -170,6 +170,17 @@ r2-salon-website/
 - Animated counters
 - Hover states
 
+### 7. Live Chat Feature:
+
+- Instant auto-responses
+- Smart message replies
+- Quick reply buttons (Book, Services, Pricing, Location)
+- Typing indicators
+- Message history
+- Timestamps
+- Online status indicator
+- Pre-programmed responses for common queries
+
 ## 📱 Responsive Design
 
 **Breakpoints:**
