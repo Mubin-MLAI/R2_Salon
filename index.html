@@ -8,6 +8,914 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
+<!-- ============================================
+     R2 SALON LIVE CHAT WIDGET - EMBED CODE
+     ============================================
+     
+     Copy this entire code and paste it just before
+     the closing </body> tag in all your HTML pages
+     (index.html, services.html, gallery.html, etc.)
+     
+     ============================================ -->
+
+<!-- Chat Widget Styles -->
+<style>
+    /* Chat Widget Styles */
+    .r2-chat-widget-button {
+        position: fixed;
+        bottom: 8rem;
+        left: 2rem;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #D4AF37 0%, #F4E4C1 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 5px 25px rgba(212, 175, 55, 0.4);
+        z-index: 9999;
+        transition: all 0.3s ease;
+        border: none;
+        animation: r2-pulse-glow 2s infinite;
+    }
+
+    @keyframes r2-pulse-glow {
+        0%, 100% {
+            box-shadow: 0 5px 25px rgba(212, 175, 55, 0.4);
+            transform: scale(1);
+        }
+        50% {
+            box-shadow: 0 8px 35px rgba(212, 175, 55, 0.6);
+            transform: scale(1.05);
+        }
+    }
+
+    .r2-chat-widget-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 35px rgba(212, 175, 55, 0.6);
+    }
+
+    .r2-chat-widget-button i {
+        font-size: 1.75rem;
+        color: #0a0a0a;
+        transition: transform 0.3s ease;
+    }
+
+    .r2-chat-widget-button.r2-active i.fa-comment {
+        transform: rotate(-180deg) scale(0);
+    }
+
+    .r2-chat-widget-button.r2-active i.fa-times {
+        transform: rotate(0deg) scale(1);
+    }
+
+    .r2-chat-widget-button i.fa-times {
+        position: absolute;
+        transform: rotate(180deg) scale(0);
+    }
+
+    .r2-chat-notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: #EF4444;
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: 700;
+        animation: r2-bounce 1s infinite;
+        border: 2px solid #0a0a0a;
+    }
+
+    @keyframes r2-bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+    }
+
+    .r2-chat-widget-container {
+        position: fixed;
+        bottom: 9rem;
+        left: 2rem;
+        width: 420px;
+        max-width: calc(100vw - 2rem);
+        height: 700px;
+        max-height: calc(100vh - 10rem);
+        background: #0a0a0a;
+        border-radius: 20px;
+        box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+        z-index: 9998;
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+        pointer-events: none;
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        overflow: hidden;
+    }
+
+    .r2-chat-widget-container.r2-active {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: all;
+    }
+
+    .r2-chat-header {
+        background: linear-gradient(135deg, #D4AF37 0%, #B8941F 100%);
+        padding: 1.25rem;
+        border-radius: 20px 20px 0 0;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .r2-chat-header-avatar {
+        width: 45px;
+        height: 45px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        color: #0a0a0a;
+        font-weight: 700;
+        position: relative;
+    }
+
+    .r2-online-indicator {
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        width: 12px;
+        height: 12px;
+        background: #10B981;
+        border: 2px solid #0a0a0a;
+        border-radius: 50%;
+        animation: r2-pulse-green 2s infinite;
+    }
+
+    @keyframes r2-pulse-green {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+        50% { box-shadow: 0 0 0 5px rgba(16, 185, 129, 0); }
+    }
+
+    .r2-chat-header-info {
+        flex: 1;
+    }
+
+    .r2-chat-header-title {
+        font-weight: 700;
+        color: #0a0a0a;
+        font-size: 1rem;
+        margin-bottom: 0.125rem;
+    }
+
+    .r2-chat-header-status {
+        font-size: 0.75rem;
+        color: rgba(10, 10, 10, 0.7);
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+    }
+
+    .r2-chat-close-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #0a0a0a;
+        transition: all 0.3s ease;
+    }
+
+    .r2-chat-close-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: rotate(90deg);
+    }
+
+    .r2-chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        background: #0a0a0a;
+    }
+
+    .r2-chat-messages::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .r2-chat-messages::-webkit-scrollbar-track {
+        background: rgba(212, 175, 55, 0.1);
+    }
+
+    .r2-chat-messages::-webkit-scrollbar-thumb {
+        background: #D4AF37;
+        border-radius: 3px;
+    }
+
+    .r2-chat-message {
+        display: flex;
+        gap: 0.75rem;
+        animation: r2-messageSlideIn 0.3s ease;
+    }
+
+    @keyframes r2-messageSlideIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .r2-chat-message.r2-user {
+        flex-direction: row-reverse;
+    }
+
+    .r2-message-avatar {
+        width: 32px;
+        height: 32px;
+        background: #D4AF37;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: #0a0a0a;
+        flex-shrink: 0;
+    }
+
+    .r2-chat-message.r2-user .r2-message-avatar {
+        background: #151515;
+        color: #D4AF37;
+    }
+
+    .r2-message-content {
+        max-width: 70%;
+    }
+
+    .r2-message-bubble {
+        background: #151515;
+        padding: 0.875rem 1rem;
+        border-radius: 18px;
+        color: #ffffff;
+        line-height: 1.5;
+        font-size: 0.9375rem;
+        word-wrap: break-word;
+    }
+
+    .r2-chat-message.r2-user .r2-message-bubble {
+        background: linear-gradient(135deg, #D4AF37 0%, #B8941F 100%);
+        color: #0a0a0a;
+    }
+
+    .r2-message-time {
+        font-size: 0.75rem;
+        color: #b0b0b0;
+        margin-top: 0.25rem;
+        padding: 0 0.5rem;
+    }
+
+    .r2-chat-message.r2-user .r2-message-time {
+        text-align: right;
+    }
+
+    .r2-typing-indicator {
+        display: none;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.5rem 0;
+    }
+
+    .r2-typing-indicator.r2-active {
+        display: flex;
+    }
+
+    .r2-typing-dots {
+        display: flex;
+        gap: 0.375rem;
+        padding: 0.875rem 1rem;
+        background: #151515;
+        border-radius: 18px;
+    }
+
+    .r2-typing-dot {
+        width: 8px;
+        height: 8px;
+        background: #D4AF37;
+        border-radius: 50%;
+        animation: r2-typingDot 1.4s infinite;
+    }
+
+    .r2-typing-dot:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .r2-typing-dot:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    @keyframes r2-typingDot {
+        0%, 60%, 100% {
+            transform: translateY(0);
+            opacity: 0.5;
+        }
+        30% {
+            transform: translateY(-10px);
+            opacity: 1;
+        }
+    }
+
+    .r2-quick-replies {
+        padding: 1rem 1.5rem;
+        background: #0a0a0a;
+        border-top: 1px solid rgba(212, 175, 55, 0.1);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        max-height: 200px;
+        overflow: hidden;
+        transition: all 0.5s ease, max-height 0.5s ease, padding 0.5s ease, opacity 0.5s ease;
+    }
+
+    .r2-quick-replies.r2-hidden {
+        max-height: 0;
+        padding: 0 1.5rem;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .r2-quick-reply-btn {
+        padding: 0.5rem 1rem;
+        background: rgba(212, 175, 55, 0.1);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: 20px;
+        color: #D4AF37;
+        font-size: 0.875rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+    .r2-quick-reply-btn:hover {
+        background: #D4AF37;
+        color: #0a0a0a;
+        transform: translateY(-2px);
+    }
+
+    .r2-chat-input-container {
+        padding: 1rem 1.5rem;
+        background: #0a0a0a;
+        border-top: 1px solid rgba(212, 175, 55, 0.1);
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+    }
+
+    .r2-chat-input {
+        flex: 1;
+        background: #151515;
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        border-radius: 25px;
+        padding: 0.875rem 1.25rem;
+        color: #ffffff;
+        font-size: 0.9375rem;
+        outline: none;
+        transition: all 0.3s ease;
+        font-family: inherit;
+    }
+
+    .r2-chat-input:focus {
+        border-color: #D4AF37;
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+    }
+
+    .r2-chat-input::placeholder {
+        color: #b0b0b0;
+    }
+
+    .r2-chat-send-btn {
+        width: 45px;
+        height: 45px;
+        background: linear-gradient(135deg, #D4AF37 0%, #B8941F 100%);
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: #0a0a0a;
+        font-size: 1.125rem;
+    }
+
+    .r2-chat-send-btn:hover:not(:disabled) {
+        transform: scale(1.1);
+        box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .r2-chat-send-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .r2-welcome-message {
+        text-align: center;
+        padding: 2rem 1rem;
+        color: #b0b0b0;
+    }
+
+    .r2-welcome-message i {
+        font-size: 3rem;
+        color: #D4AF37;
+        margin-bottom: 1rem;
+    }
+
+    .r2-welcome-message h3 {
+        color: #ffffff;
+        margin-bottom: 0.5rem;
+        font-size: 1.25rem;
+    }
+
+    .r2-welcome-message p {
+        font-size: 0.9375rem;
+        line-height: 1.6;
+    }
+
+    @media (max-width: 480px) {
+        .r2-chat-widget-container {
+            width: calc(100vw - 1rem);
+            height: calc(100vh - 10rem);
+            left: 0.5rem;
+            bottom: 7rem;
+        }
+
+        .r2-chat-widget-button {
+            width: 55px;
+            height: 55px;
+            bottom: 1.5rem;
+            left: 1.5rem;  /* Add this */
+        }
+    }
+</style>
+
+<!-- Chat Widget HTML -->
+<button class="r2-chat-widget-button" id="r2ChatButton" onclick="r2ToggleChat()">
+    <i class="fas fa-comment"></i>
+    <i class="fas fa-times"></i>
+    <span class="r2-chat-notification-badge" id="r2NotificationBadge">1</span>
+</button>
+
+<div class="r2-chat-widget-container" id="r2ChatContainer">
+    <div class="r2-chat-header">
+        <div class="r2-chat-header-avatar">
+            R2
+            <span class="r2-online-indicator"></span>
+        </div>
+        <div class="r2-chat-header-info">
+            <div class="r2-chat-header-title">R2 Salon Support</div>
+            <div class="r2-chat-header-status">
+                <i class="fas fa-circle" style="font-size: 0.5rem; color: #10B981;"></i>
+                Online - Quick replies
+            </div>
+        </div>
+        <button class="r2-chat-close-btn" onclick="r2ToggleChat()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <div class="r2-chat-messages" id="r2ChatMessages">
+        <div class="r2-welcome-message">
+            <i class="fas fa-gem"></i>
+            <h3>Welcome to R2 Salon!</h3>
+            <p>We're here to help with bookings, services, and beauty advice.</p>
+        </div>
+
+        <div class="r2-chat-message">
+            <div class="r2-message-avatar">R2</div>
+            <div class="r2-message-content">
+                <div class="r2-message-bubble">
+                    Hi! 👋 How can we help you today?
+                </div>
+                <div class="r2-message-time">Just now</div>
+            </div>
+        </div>
+
+        <div class="r2-typing-indicator" id="r2TypingIndicator">
+            <div class="r2-message-avatar">R2</div>
+            <div class="r2-typing-dots">
+                <span class="r2-typing-dot"></span>
+                <span class="r2-typing-dot"></span>
+                <span class="r2-typing-dot"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="r2-quick-replies">
+        <button class="r2-quick-reply-btn" onclick="r2SendQuickReply('Book Appointment')">
+            📅 Book Now
+        </button>
+        <button class="r2-quick-reply-btn" onclick="r2SendQuickReply('View Services')">
+            💇 Services
+        </button>
+        <button class="r2-quick-reply-btn" onclick="r2SendQuickReply('Pricing')">
+            💰 Pricing
+        </button>
+        <button class="r2-quick-reply-btn" onclick="r2SendQuickReply('Location')">
+            📍 Location
+        </button>
+    </div>
+
+    <div class="r2-chat-input-container">
+        <input 
+            type="text" 
+            class="r2-chat-input" 
+            id="r2ChatInput" 
+            placeholder="Type your message..."
+            onkeypress="r2HandleKeyPress(event)"
+        >
+        <button class="r2-chat-send-btn" onclick="r2SendMessage()">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Chat Widget JavaScript -->
+<script>
+    let r2IsChatOpen = false;
+    let r2MessageCount = 0;
+    let r2QuickRepliesUsed = false;
+
+    function r2ToggleChat() {
+        r2IsChatOpen = !r2IsChatOpen;
+        const chatContainer = document.getElementById('r2ChatContainer');
+        const chatButton = document.getElementById('r2ChatButton');
+        const notificationBadge = document.getElementById('r2NotificationBadge');
+
+        if (r2IsChatOpen) {
+            chatContainer.classList.add('r2-active');
+            chatButton.classList.add('r2-active');
+            if (notificationBadge) notificationBadge.style.display = 'none';
+            
+            setTimeout(() => {
+                document.getElementById('r2ChatInput').focus();
+            }, 300);
+        } else {
+            chatContainer.classList.remove('r2-active');
+            chatButton.classList.remove('r2-active');
+        }
+    }
+
+    function r2SendMessage() {
+        const input = document.getElementById('r2ChatInput');
+        const message = input.value.trim();
+
+        if (!message) return;
+
+        r2AddMessage(message, 'user');
+        input.value = '';
+
+        // Hide quick replies after first user message
+        r2HideQuickReplies();
+
+        r2ShowTyping();
+        setTimeout(() => {
+            r2HideTyping();
+            const response = r2GenerateResponse(message);
+            r2AddMessage(response, 'bot');
+        }, 1500);
+    }
+
+    function r2SendQuickReply(message) {
+        r2AddMessage(message, 'user');
+        
+        // Hide quick replies after use
+        r2HideQuickReplies();
+        
+        r2ShowTyping();
+        setTimeout(() => {
+            r2HideTyping();
+            const response = r2GenerateResponse(message);
+            r2AddMessage(response, 'bot');
+        }, 1500);
+    }
+
+    function r2HideQuickReplies() {
+        if (!r2QuickRepliesUsed) {
+            const quickReplies = document.querySelector('.r2-quick-replies');
+            if (quickReplies) {
+                setTimeout(() => {
+                    quickReplies.classList.add('r2-hidden');
+                }, 300);
+                r2QuickRepliesUsed = true;
+            }
+        }
+    }
+
+    function r2AddMessage(text, sender) {
+        const messagesContainer = document.getElementById('r2ChatMessages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `r2-chat-message ${sender === 'user' ? 'r2-user' : ''}`;
+
+        const avatar = sender === 'user' ? 'YOU' : 'R2';
+        const time = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+        messageDiv.innerHTML = `
+            <div class="r2-message-avatar">${avatar}</div>
+            <div class="r2-message-content">
+                <div class="r2-message-bubble">${text}</div>
+                <div class="r2-message-time">${time}</div>
+            </div>
+        `;
+
+        const welcomeMsg = messagesContainer.querySelector('.r2-welcome-message');
+        if (welcomeMsg && r2MessageCount === 0) {
+            welcomeMsg.remove();
+        }
+
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        r2MessageCount++;
+    }
+
+    function r2ShowTyping() {
+        document.getElementById('r2TypingIndicator').classList.add('r2-active');
+        const messagesContainer = document.getElementById('r2ChatMessages');
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function r2HideTyping() {
+        document.getElementById('r2TypingIndicator').classList.remove('r2-active');
+    }
+
+    function r2GenerateResponse(message) {
+        const lowerMessage = message.toLowerCase();
+
+        const responses = {
+            'book appointment': '📅 Perfect! To book instantly, please WhatsApp us at <a href="https://wa.me/918080934862" target="_blank" style="color: #D4AF37; font-weight: 600;">+91 797-793-4485</a> or call directly. We\'re open daily until 11 PM!',
+            
+            'view services': '💇 Our services include:<br>• Premium Haircuts<br>• Hair Coloring & Balayage<br>• Hair Spa & Treatments<br>• Nanoplastia & Botox<br>• Smoothening<br>• Grooming Services<br><br>Which interests you?',
+            
+            'pricing': '💰 Sample pricing:<br>• Haircut: ₹299+<br>• Hair Spa: ₹999+<br>• Balayage: ₹3,999+<br>• Nanoplastia: ₹4,999+<br><br>Contact us for detailed pricing!',
+            
+            'location': '📍 Visit us at:<br>Shop No. 01, Rainbow Tower,<br>Sector 20, Airoli, Navi Mumbai<br><br>📞 918080934862<br>🕐 Open daily until 11 PM',
+            
+            'hi': 'Hello! 👋 How can I assist you?',
+            'hello': 'Hi! 😊 What can I help with?',
+            'thanks': 'You\'re welcome! ✨',
+            'hours': '🕐 We\'re open daily until 11 PM!',
+            
+            'default': 'For personalized help, WhatsApp us: <a href="https://wa.me/918080934862" target="_blank" style="color: #D4AF37; font-weight: 600;">Chat Now</a> or call 918080934862. We\'re here for you! 💎'
+        };
+
+        for (let key in responses) {
+            if (lowerMessage.includes(key)) {
+                return responses[key];
+            }
+        }
+
+        return responses.default;
+    }
+
+    function r2HandleKeyPress(event) {
+        if (event.key === 'Enter') {
+            r2SendMessage();
+        }
+    }
+</script>
+
+<!-- ============================================
+     END OF R2 SALON LIVE CHAT WIDGET CODE
+     ============================================ -->
+
+<!-- Chat Widget HTML -->
+<button class="r2-chat-widget-button" id="r2ChatButton" onclick="r2ToggleChat()">
+    <i class="fas fa-comment"></i>
+    <i class="fas fa-times"></i>
+    <span class="r2-chat-notification-badge" id="r2NotificationBadge">1</span>
+</button>
+
+<div class="r2-chat-widget-container" id="r2ChatContainer">
+    <div class="r2-chat-header">
+        <div class="r2-chat-header-avatar">
+            R2
+            <span class="r2-online-indicator"></span>
+        </div>
+        <div class="r2-chat-header-info">
+            <div class="r2-chat-header-title">R2 Salon Support</div>
+            <div class="r2-chat-header-status">
+                <i class="fas fa-circle" style="font-size: 0.5rem; color: #10B981;"></i>
+                Online - Quick replies
+            </div>
+        </div>
+        <button class="r2-chat-close-btn" onclick="r2ToggleChat()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <div class="r2-chat-messages" id="r2ChatMessages">
+        <div class="r2-welcome-message">
+            <i class="fas fa-gem"></i>
+            <h3>Welcome to R2 Salon!</h3>
+            <p>We're here to help with bookings, services, and beauty advice.</p>
+        </div>
+
+        <div class="r2-chat-message">
+            <div class="r2-message-avatar">R2</div>
+            <div class="r2-message-content">
+                <div class="r2-message-bubble">
+                    Hi! 👋 How can we help you today?
+                </div>
+                <div class="r2-message-time">Just now</div>
+            </div>
+        </div>
+
+        <div class="r2-typing-indicator" id="r2TypingIndicator">
+            <div class="r2-message-avatar">R2</div>
+            <div class="r2-typing-dots">
+                <span class="r2-typing-dot"></span>
+                <span class="r2-typing-dot"></span>
+                <span class="r2-typing-dot"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="r2-quick-replies">
+        <button class="r2-quick-reply-btn" onclick="r2SendQuickReply('Book Appointment')">
+            📅 Book Now
+        </button>
+        <button class="r2-quick-reply-btn" onclick="r2SendQuickReply('View Services')">
+            💇 Services
+        </button>
+        <button class="r2-quick-reply-btn" onclick="r2SendQuickReply('Pricing')">
+            💰 Pricing
+        </button>
+        <button class="r2-quick-reply-btn" onclick="r2SendQuickReply('Location')">
+            📍 Location
+        </button>
+    </div>
+
+    <div class="r2-chat-input-container">
+        <input 
+            type="text" 
+            class="r2-chat-input" 
+            id="r2ChatInput" 
+            placeholder="Type your message..."
+            onkeypress="r2HandleKeyPress(event)"
+        >
+        <button class="r2-chat-send-btn" onclick="r2SendMessage()">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Chat Widget JavaScript -->
+<script>
+    let r2IsChatOpen = false;
+    let r2MessageCount = 0;
+
+    function r2ToggleChat() {
+        r2IsChatOpen = !r2IsChatOpen;
+        const chatContainer = document.getElementById('r2ChatContainer');
+        const chatButton = document.getElementById('r2ChatButton');
+        const notificationBadge = document.getElementById('r2NotificationBadge');
+
+        if (r2IsChatOpen) {
+            chatContainer.classList.add('r2-active');
+            chatButton.classList.add('r2-active');
+            if (notificationBadge) notificationBadge.style.display = 'none';
+            
+            setTimeout(() => {
+                document.getElementById('r2ChatInput').focus();
+            }, 300);
+        } else {
+            chatContainer.classList.remove('r2-active');
+            chatButton.classList.remove('r2-active');
+        }
+    }
+
+    function r2SendMessage() {
+        const input = document.getElementById('r2ChatInput');
+        const message = input.value.trim();
+
+        if (!message) return;
+
+        r2AddMessage(message, 'user');
+        input.value = '';
+
+        r2ShowTyping();
+        setTimeout(() => {
+            r2HideTyping();
+            const response = r2GenerateResponse(message);
+            r2AddMessage(response, 'bot');
+        }, 1500);
+    }
+
+    function r2SendQuickReply(message) {
+        r2AddMessage(message, 'user');
+        
+        r2ShowTyping();
+        setTimeout(() => {
+            r2HideTyping();
+            const response = r2GenerateResponse(message);
+            r2AddMessage(response, 'bot');
+        }, 1500);
+    }
+
+    function r2AddMessage(text, sender) {
+        const messagesContainer = document.getElementById('r2ChatMessages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `r2-chat-message ${sender === 'user' ? 'r2-user' : ''}`;
+
+        const avatar = sender === 'user' ? 'YOU' : 'R2';
+        const time = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+        messageDiv.innerHTML = `
+            <div class="r2-message-avatar">${avatar}</div>
+            <div class="r2-message-content">
+                <div class="r2-message-bubble">${text}</div>
+                <div class="r2-message-time">${time}</div>
+            </div>
+        `;
+
+        const welcomeMsg = messagesContainer.querySelector('.r2-welcome-message');
+        if (welcomeMsg && r2MessageCount === 0) {
+            welcomeMsg.remove();
+        }
+
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        r2MessageCount++;
+    }
+
+    function r2ShowTyping() {
+        document.getElementById('r2TypingIndicator').classList.add('r2-active');
+        const messagesContainer = document.getElementById('r2ChatMessages');
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function r2HideTyping() {
+        document.getElementById('r2TypingIndicator').classList.remove('r2-active');
+    }
+
+    function r2GenerateResponse(message) {
+        const lowerMessage = message.toLowerCase();
+
+        const responses = {
+            'book appointment': '📅 Perfect! To book instantly, please WhatsApp us at <a href="https://wa.me/918080934862" target="_blank" style="color: #D4AF37; font-weight: 600;">+91 797-793-4485</a> or call directly. We\'re open daily until 11 PM!',
+            
+            'view services': '💇 Our services include:<br>• Premium Haircuts<br>• Hair Coloring & Balayage<br>• Hair Spa & Treatments<br>• Nanoplastia & Botox<br>• Smoothening<br>• Grooming Services<br><br>Which interests you?',
+            
+            'pricing': '💰 Sample pricing:<br>• Haircut: ₹299+<br>• Hair Spa: ₹999+<br>• Balayage: ₹3,999+<br>• Nanoplastia: ₹4,999+<br><br>Contact us for detailed pricing!',
+            
+            'location': '📍 Visit us at:<br>Shop No. 01, Rainbow Tower,<br>Sector 20, Airoli, Navi Mumbai<br><br>📞 918080934862<br>🕐 Open daily until 11 PM',
+            
+            'hi': 'Hello! 👋 How can I assist you?',
+            'hello': 'Hi! 😊 What can I help with?',
+            'thanks': 'You\'re welcome! ✨',
+            'hours': '🕐 We\'re open daily until 11 PM!',
+            
+            'default': 'For personalized help, WhatsApp us: <a href="https://wa.me/918080934862" target="_blank" style="color: #D4AF37; font-weight: 600;">Chat Now</a> or call +918080934862. We\'re here for you! 💎'
+        };
+
+        for (let key in responses) {
+            if (lowerMessage.includes(key)) {
+                return responses[key];
+            }
+        }
+
+        return responses.default;
+    }
+
+    function r2HandleKeyPress(event) {
+        if (event.key === 'Enter') {
+            r2SendMessage();
+        }
+    }
+</script>
+
+<!-- ============================================
+     END OF R2 SALON LIVE CHAT WIDGET CODE
+     ============================================ -->
+
 <body>
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
@@ -26,7 +934,7 @@
             <div class="nav-cta">
                 <a href="tel:07977934485" class="cta-phone">
                     <i class="fas fa-phone-alt"></i>
-                    <span>079779 34485</span>
+                    <span>918080934862</span>
                 </a>
                 <a href="booking.html" class="btn-primary">Book Appointment</a>
             </div>
@@ -299,7 +1207,7 @@
                 <p>Book your appointment today and experience the R2 Salon difference</p>
                 <div class="cta-buttons">
                     <a href="booking.html" class="btn-primary btn-large">Book Appointment</a>
-                    <a href="https://wa.me/917977934485" class="btn-whatsapp btn-large" target="_blank">
+                    <a href="https://wa.me/918080934862" class="btn-whatsapp btn-large" target="_blank">
                         <i class="fab fa-whatsapp"></i>
                         WhatsApp Us
                     </a>
@@ -322,7 +1230,7 @@
                         hair and beauty services with expert care.
                     </p>
                     <div class="social-links">
-                        <a href="https://wa.me/917977934485" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://wa.me/918080934862" target="_blank"><i class="fab fa-whatsapp"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="https://www.google.com/maps/search/?api=1&query=R2+Unisex+Salon+Airoli" target="_blank"><i class="fas fa-map-marker-alt"></i></a>
@@ -357,7 +1265,7 @@
                         </li>
                         <li>
                             <i class="fas fa-phone"></i>
-                            <a href="tel:07977934485">079779 34485</a>
+                            <a href="tel:07977934485">918080934862</a>
                         </li>
                         <li>
                             <i class="fas fa-clock"></i>
@@ -371,9 +1279,9 @@
             </div>
         </div>
     </footer>
-
+    <br><br>
     <!-- WhatsApp Float Button -->
-    <a href="https://wa.me/917977934485?text=Hi%20R2%20Salon!%20I%20would%20like%20to%20book%20an%20appointment." 
+    <a href="https://wa.me/918080934862?text=Hi%20R2%20Salon!%20I%20would%20like%20to%20book%20an%20appointment." 
        class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
         <span class="whatsapp-tooltip">Chat with us</span>
